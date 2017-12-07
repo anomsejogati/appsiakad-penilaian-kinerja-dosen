@@ -83,5 +83,29 @@ public class KriteriaNilaiDosen extends KoneksiDB{
         }
     }
     
+    public String[] KeyKriteria, Kriteria;
+    public void listKriteria(){
+        try{
+            conn = getConnection();
+            query = "select * from pg_kriterianilaidosen";
+            stat = conn.prepareStatement(query);
+            res = stat.executeQuery(query);
+            int i = 1;
+            while(res.next()){
+                Kriteria[i] = res.getString(2);
+                i++;
+            }
+            res.first();
+            KeyKriteria = new String[i+1];
+            for(int x=1 ; x<i ; x++){
+                KeyKriteria[x] = res.getString(1);
+                res.next();
+            }
+            stat.close();
+        } catch (SQLException ex) {
+            System.out.println("Error Method listKriteria : "+ex);
+        }
+    }
+    
     
 }
