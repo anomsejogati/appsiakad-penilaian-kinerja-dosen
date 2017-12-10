@@ -47,6 +47,25 @@ public class NilaiDosen extends KoneksiDB{
         
     }
     
+    public void insert_update_masukan(){
+        try{
+            conn = getConnection();
+            if(isUpdate == false){
+                query = " insert into pg_masukandosen values(?,?) ";
+            }else{
+                query = " update pg_masukandosen set kd_nilai=?, masukan=? "
+                        + " where kd_nilai='"+kd_nilai+"' ";
+            }
+            stat = conn.prepareStatement(query);
+            stat.setString(1, kd_nilai);
+            stat.setString(2, masukan);
+            stat.executeUpdate();
+            stat.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error method insert_update_masukan() : " + ex);
+        }
+    }
+    
     public void insert_update(){
         try{
             conn = getConnection();
