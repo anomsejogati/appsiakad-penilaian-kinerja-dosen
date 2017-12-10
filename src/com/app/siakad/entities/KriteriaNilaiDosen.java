@@ -52,7 +52,7 @@ public class KriteriaNilaiDosen extends KoneksiDB{
         try{
             conn = getConnection();
             if(isUpdate == false){
-                query = " insert into pg_kriterianilaidosen values(?,?,?) ";
+                query = " insert into pg_kriterianilaidosen values(?,?,?,?,?,?) ";
             }else{
                 query = " update pg_kriterianilaidosen set kd_knd=?, kd_katn=?, kriteria_penilaian=?, kd_prodi=?, kategori_penilaian=?,id_th=? "
                         + " where kd_knd='"+kd_knd+"' ";
