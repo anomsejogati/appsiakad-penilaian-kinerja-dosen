@@ -120,6 +120,28 @@ public void delete(String nik){
             JOptionPane.showMessageDialog(null, "Error method delete() : " + ex);
         }
     }
-
-
+    
+    public String[] KeyDosen, Dosen;
+    public void listDosen(){
+        try{
+            conn = getConnection();
+            query = "select * from pg_dosen";
+            stat = conn.prepareStatement(query);
+            res = stat.executeQuery(query);
+            int i = 1;
+            while(res.next()){
+                Dosen[i] = res.getString(2);
+                i++;
+            }
+            res.first();
+            KeyDosen = new String[i+1];
+            for(int x=1 ; x<i ; x++){
+                KeyDosen[x] = res.getString(1);
+                res.next();
+            }
+            stat.close();
+        } catch (SQLException ex) {
+            System.out.println("Error Method listDosen : "+ex);
+        }
+    }
 }
