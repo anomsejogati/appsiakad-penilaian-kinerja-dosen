@@ -82,6 +82,31 @@ public class NilaiDosen extends KoneksiDB{
         }
     }
     
+    //membuat combobox nilai otomatis
+    public String[] KeyNilai, Nilai;
+    public void listNilai(){
+        try{
+            conn = getConnection();
+            query = "select * from pg_nilaidosen";
+            stat = conn.prepareStatement(query);
+            res = stat.executeQuery(query);
+            int i = 1;
+            while(res.next()){
+                Nilai[i] = res.getString(nilai);
+                i++;
+            }
+            res.first();
+            KeyNilai = new String[i+1];
+            for(int x=1 ; x<i ; x++){
+                KeyNilai[x] = res.getString(1);
+                res.next();
+            }
+            stat.close();
+        } catch (SQLException ex) {
+            System.out.println("Error Method listNilai : "+ex);
+        }
+    }
+    
     
     
 }
