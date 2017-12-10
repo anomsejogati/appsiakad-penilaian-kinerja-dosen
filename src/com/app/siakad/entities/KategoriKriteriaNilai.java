@@ -78,4 +78,29 @@ public class KategoriKriteriaNilai extends KoneksiDB {
         }
     }
     
+    public String[] KeyKategoriNilai, Kategori;
+    public void listKategoriNilai(){
+        try{
+            conn = getConnection();
+            query = "select * from pg_Kategorikriterianilai";
+            stat = conn.prepareStatement(query);
+            res = stat.executeQuery(query);
+            int i = 1;
+            while(res.next()){
+                Kategori[i] = res.getString(2);
+                i++;
+            }
+            res.first();
+            KeyKategoriNilai = new String[i+1];
+            for(int x=1 ; x<i ; x++){
+                KeyKategoriNilai[x] = res.getString(1);
+                res.next();
+            }
+            stat.close();
+        } catch (SQLException ex) {
+            System.out.println("Error Method listKategoriNilai() : "+ex);
+        }
+    }
+    
+    
 }
